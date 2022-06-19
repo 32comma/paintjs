@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #canvas {
+            width: 700px;
+            height: 700px;
+        }
+
+        #container {
+            text-align: center;
+        }
+
+
+        canvas {
+            background-color: white;
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <canvas id="canvas">
+
+        </canvas>
+    </div>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext("2d");
+        var painting = false;
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2.5;
+        canvas.width = 700;
+        canvas.height = 700;
+        ctx.fileStyle = 'white';
+        canvas.addEventListener('mousemove', onMouseMove);
+        canvas.addEventListener('mouseup', onMouseUp);
+        canvas.addEventListener('mousedown', onMouseDown);
+
+        function onMouseMove(e) {
+
+            if (!painting) {
+                ctx.beginPath();
+                console.log("t" + e.offsetX, e.offsetY);
+                ctx.moveTo(e.offsetX, e.offsetY);
+            } else {
+                console.log("f" + e.offsetX, e.offsetY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+
+            }
+        }
+
+        function onMouseUp() {
+            painting = false;
+        }
+
+        function onMouseDown() {
+            painting = true;
+        }
+    </script>
+</body>
+
+</html>
